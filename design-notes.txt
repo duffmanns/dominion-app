@@ -1,0 +1,55 @@
+Rough Design
+
+User Attirbutes
+	string username;
+	int wins;
+	int loses;
+	actions = 1;
+	buys = 1;
+	coin = 0;
+	hand[];
+	deck[];
+	discard[];
+	turnsTaken;
+
+Kingdom Card Attributes
+	string name;
+	enum type; //action, treasure, victory, curse, reaction, attack
+	enum secondaryType;
+	int cost;
+	ability[]; //coresponds to function name;
+
+Supply
+	Estate (8/12)
+	Duchy (8/12)
+	Province (8/12)
+	Colony (8/12) //do this after the base deck
+	Curse (10/20/30)
+	Coppper (60)
+	Silver (40)
+	Gold (30)
+	Platinum(12)
+	10x Kindgom Cards(10/12)
+	Trash(0) //put trashed card in an array
+
+Global
+	var whosTurn;
+
+
+Setup
+	Randomize Kingdom Ten cards()
+	Initialize Supply()
+	For each player {
+		Create Deck()
+		Shuffle Deck()
+		Deal Cards()
+	}
+	Who Goes First ()
+
+Gameplay
+	Activate Current User (whosturn)
+	Play Phase()
+	Buy Phase()
+	Check for end game()
+	Cleanup Phase()
+	Change to Next Player ()
