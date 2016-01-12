@@ -1,202 +1,82 @@
 /* Dustin Manns 12/28/2015
    All of the base decks as objects */
 
- var cellar = {
- 	"name": "Cellar",
-  	"cost": 2,
-	"type": "action",
- 	"secondType": "",
- 	"ability": ["plusAction(1)","selectCard(hand.length()+1,0)","discard(x)","draw(x.length)"] //x is array
- };
-
- var chapel = {
- 	"name": "Chapel",
-  	"cost": 2,
-	"type": "action",
- 	"secondType": "",
- 	"ability": ["checkTrashNumber(x.length,4)","trash(x)"] //x is an array
- };
-
- var moat = {
- 	"name": "Moat",
-  	"cost": 2,
-	"type": "action",
- 	"secondType": "reaction", //TODO:decide how to code reactions
- 	"ability": ["draw(2)"]
- };
-
- var chancellor = {
- 	"name": "Chancellor",
-  	"cost": 3,
-	"type": "action",
- 	"secondType": "",
- 	"ability": ["plusMoney(2)","deckToDiscard()"] //May need to pass var here
- };
-
- var village = {
- 	"name": "Village",
-  	"cost": 3,
-	"type": "action",
- 	"secondType": "",
- 	"ability": ["plusAction(2)","draw(1)"]
- };
-
-var woodcutter = {
-	"name": "Woodcutter",
-	"cost": 3,
-	"type": "action",
-	"secondType": "",
-	"ability": ["plusBuy(1)","plusMoney(2)"]
+var KingdomCard = function(name,cost,type,secondType,ability) {
+	this.name = name;
+	this.cost = cost;
+	this.type = type;
+	this.secondType = secondType;
+	this.ability = ability;
 };
 
-var workshop = {
-	"name": "Workshop",
-	"cost": 3,
-	"type": "action",
-	"secondType": "",
-	"ability": ["selectCard(1,4)","gainCard(x,1,\"discard\")"]
-};
+var baseCardList = [
+	"cellar","chapel","moat","chancellor","village","woodcutter","workshop",
+	"bureaucrat","feast","gardens","militia","moneylender","remodel","smithy","spy",
+	"thief","throneRoom","councilRoom","festival","library","laboratory","market",
+	"witch","mine","adventurer"
+];
 
-var bureaucrat = {
-	"name": "Bureaucrat",
-	"cost": 4,
-	"type": "action",
-	"secondType": "attack",
-	"ability": ["gainCard(\"silver\",1,\"deck\")","victoryOnDeck()"]
-};
+var cellar = new KingdomCard("Cellar",2,"action","",
+	["plusAction(1)","selectCard(hand.length()+1,0)","discard(x)","draw(x.length)"]); //x is array
 
-var feast = {
-	"name": "Feast",
-	"cost": 4,
-	"type": "action",
-	"secondType": "",
-	"ability": ["trashFeast()","selectCard(1,5)","gainCard(x,1,\"discard\")"] //have to make throne room work with this
-};
+var chapel = new KingdomCard("Chapel",2,"action","",
+ 	["checkTrashNumber(x.length,4)","trash(x)"]); //x is an array
 
-var gardens = {
-	"name": "Gardens",
-	"cost": 4,
-	"type": "victory", //can't play if primary is victory
-	"secondType": "",
-	"ability": ["plusVictory(Math.floor(totalCards/10))"]
-};
+var moat = new KingdomCard("Moat",2,"action","reaction", //TODO:decide how to code reactions
+ 	["draw(2)"]);
 
-var militia = {
-	"name": "Militia",
-	"cost": 4,
-	"type": "action",
-	"secondType": "attack",
-	"ability": ["plusMoney(2)", "forceDiscardTo(3)"]
-};
+var chancellor = new KingdomCard("Chancellor",3,"action","",
+ 	["plusMoney(2)","deckToDiscard()"]); //May need to pass var here
 
-var moneylender = {
-	"name": "Moneylender",
-	"cost": 4,
-	"type": "action",
-	"secondType": "",
-	"ability": ["trash(copper)","plusMoney(3)"]
-};
+var village = new KingdomCard("Village",3,"action","",
+ 	["plusAction(2)","draw(1)"]);
 
-var remodel = {
-	"name": "Remodel",
-	"cost": 4,
-	"type": "action",
-	"secondType": "",
-	"ability": ["trash(card)","selectCard(1,card.cost+2)","gainCard(x,1,\"discard\")"]
-};
+var woodcutter = new KingdomCard("Woodcutter",3,"action","",["plusBuy(1)","plusMoney(2)"]);
 
-var smithy = {
-	"name": "Smithy",
-	"cost": 4,
-	"type": "action",
-	"secondType": "",
-	"ability": ["draw(3)"]
-};
+var workshop = new KingdomCard("Workshop",3,"action","",
+	["selectCard(1,4)","gainCard(x,1,\"discard\")"]);
 
-var spy = {
-	"name": "Spy",
-	"cost": 4,
-	"type": "action",
-	"secondType": "attack",
-	"ability": ["plusAction(1)","draw(1)","spyAttack()"]
-};
+var bureaucrat = new KingdomCard("Bureaucrat",4,"action","attack",
+	["gainCard(\"silver\",1,\"deck\")","victoryOnDeck()"]);
 
-var thief = {
-	"name": "Thief",
-	"cost": 4,
-	"type": "action",
-	"secondType": "attack",
-	"ability": ["thiefAttack()"]
-}
+var feast = new KingdomCard("Feast",4,"action","",
+	["trashFeast()","selectCard(1,5)","gainCard(x,1,\"discard\")"]); //have to make throne room work with this
 
-var throneRoom = {
-	"name": "Throne Room",
-	"cost": 4,
-	"type": "action",
-	"secondType": "",
-	"ability": ["selectCard(1,0)","cloneCard(x)"]  //clone card creates a dupe card, plays them both, deletes the dupe
-};
+var gardens = new KingdomCard("Gardens",4,"victory", //can't play if primary is victory
+	"",["plusVictory(Math.floor(totalCards/10))"]);
 
-var councilRoom = {
-	"name": "Council Room",
-	"cost": 5,
-	"type": "action",
-	"secondType": "",
-	"ability": ["draw(4)","plusBuy(1)","opponentDraw(1)"]
-};
+var militia = new KingdomCard("Militia",4,"action","attack",["plusMoney(2)", "forceDiscardTo(3)"]);
 
-var festival = {
-	"name": "Festival",
-	"cost": 5,
-	"type": "action",
-	"secondType": "",
-	"ability": ["plusAction(2)","draw(1)","plusMoney(2)"]
-};
+var moneylender = new KingdomCard("Moneylender",4,"action","",["trash(copper)","plusMoney(3)"]);
 
-var laboratory = {
-	"name": "Laboratory",
-	"cost": 5,
-	"type": "action",
-	"secondType": "",
-	"ability": ["plusAction(1)","draw(2)"]
-};
+var remodel = new KingdomCard("Remodel",4,"action","",
+	["trash(card)","selectCard(1,card.cost+2)","gainCard(x,1,\"discard\")"]);
 
-var library = {
-	"name": "Library",
-	"cost": 5,
-	"type": "action",
-	"secondType": "",
-	"ability": ["drawToSeven()"]
-};
+var smithy = new KingdomCard("Smithy",4,"action","",["draw(3)"]);
 
-var market = {
-	"name": "Market",
-	"cost": 5,
-	"type": "action",
-	"secondType": "",
-	"ability": ["plusAction(1)","plusMoney(1)","draw(1)","plusBuy(1)"]
-};
+var spy = new KingdomCard("Spy",4,"action","attack",["plusAction(1)","draw(1)","spyAttack()"]);
 
-var mine = {
-	"name": "Mine",
-	"cost": 5,
-	"type": "action",
-	"secondType": "",
-	"ability": ["trashCoin()","gainCoin(x)"]
-};
+var thief = new KingdomCard("Thief",4,"action","attack",["thiefAttack()"]);
 
-var witch = {
-	"name": "Witch",
-	"cost": 5,
-	"type": "action",
-	"secondType": "attack",
-	"ability": ["draw(2)","opponentCurse(1)"]
-};
+var throneRoom = new KingdomCard("Throne Room",4,"action","",
+	["selectCard(1,0)","cloneCard(x)"]);  //clone card creates a dupe card, plays them both, deletes the dupe
 
-var adventurer = {
-	"name": "Adventurer",
-	"cost": 6,
-	"type": "action",
-	"secondType": "",
-	"ability": ["twoCoins()"]
-};
+var councilRoom = new KingdomCard("Council Room",5,"action","",
+	["draw(4)","plusBuy(1)","opponentDraw(1)"]);
+
+var festival = new KingdomCard("Festival",5,"action","",
+	["plusAction(2)","draw(1)","plusMoney(2)"]);
+
+var laboratory = new KingdomCard("Laboratory",5,"action","",["plusAction(1)","draw(2)"]);
+
+var library = new KingdomCard("Library",5,"action","",["drawToSeven()"]);
+
+var market = new KingdomCard("Market",5,"action","",
+	["plusAction(1)","plusMoney(1)","draw(1)","plusBuy(1)"]);
+
+var mine = new KingdomCard("Mine",5,"action","",["trashCoin()","gainCoin(x)"]);
+
+var witch = new KingdomCard("Witch",5,"action","attack",["draw(2)","opponentCurse(1)"]);
+
+var adventurer = new KingdomCard("Adventurer",6,"action","",["twoCoins()"]);
+
