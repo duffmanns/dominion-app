@@ -1,0 +1,22 @@
+{
+  "name": "dominion app",
+  "keywords": "backbone, backbonejs, authentication",
+  "description": "Dominion App that will allow us to play it",
+  "version": "0.1",
+
+  "author": "Dustin Manns & Kyle Pfueller",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "*",
+    "express": "~3.x.x",
+    "hbs": "~2.4.0",
+    "sqlite3": "*",
+    "underscore": "~1.5.2"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "subdomain": "dominion app"
+}
