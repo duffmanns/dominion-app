@@ -1,6 +1,8 @@
 /* Dustin Manns 12/28/2015
    Initializes the supply object */
 
+export * from "supplyAttr.js";
+
 var InitSupply = function() {
 	this.numEstate = 8;
 	this.numDuchy = 8;

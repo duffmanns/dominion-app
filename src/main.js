@@ -6,16 +6,20 @@
 
 var numPlayers = 2;
 
+
+
 // This function will return an array of 10 random kingdom cards
 function randomize () {
 	var cardList = [];
 	var availableCards = baseCardList; //Concat new decks here when they are created
 
-	for (i=0; i < 10; i++) {
+	for (var i=0; i < 10; i++) {
 		var x = Math.floor(Math.random()*availableCards.length);
 		cardList.push(availableCards[x]);
 		availableCards = availableCards.splice(x,1);
 	}
+
+	console.log(cardList);
 
 	return cardList;
 }
@@ -36,3 +40,5 @@ function Main () {
 
 	supply.kingdomCards = randomize();
 }
+
+console.log("here");
